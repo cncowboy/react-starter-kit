@@ -10,11 +10,15 @@
 import React from 'react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.css';
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+} from 'react-bootstrap';
 import Link from '../Link';
-import Navigation from '../Navigation';
-import LanguageSwitcher from '../LanguageSwitcher';
-import logoUrl from './logo-small.png';
+import s from './Header.css';
 
 const messages = defineMessages({
   brand: {
@@ -36,24 +40,24 @@ const messages = defineMessages({
 
 function Header() {
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <Navigation className={s.nav} />
-        <Link className={s.brand} to="/">
-          <img src={logoUrl} width="38" height="38" alt="React" />
-          <span className={s.brandTxt}>
-            <FormattedMessage {...messages.brand} />
-          </span>
-        </Link>
-        <LanguageSwitcher />
-        <div className={s.banner}>
-          <h1 className={s.bannerTitle}>
-            <FormattedMessage {...messages.bannerTitle} />
-          </h1>
-          <FormattedMessage tagName="p" {...messages.bannerDesc} />
-        </div>
-      </div>
-    </div>
+    <Navbar>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <Link className={s.brand} to="/">Your Company</Link>
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Nav>
+        <NavItem eventKey={1} href="#">Link</NavItem>
+        <NavItem eventKey={2} href="#">Link</NavItem>
+        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+          <MenuItem eventKey={3.1}>Action</MenuItem>
+          <MenuItem eventKey={3.2}>Another action</MenuItem>
+          <MenuItem eventKey={3.3}>Something else here</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey={3.3}>Separated link</MenuItem>
+        </NavDropdown>
+      </Nav>
+    </Navbar>
   );
 }
 
